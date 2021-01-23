@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--  轮盘转盘  -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:src="@drawable/bg_wheel_panel" />
+
+    <!--  转盘  -->
+    <com.jeanboy.app.wheelfortune.DiscLayout
+        android:id="@+id/discLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/holo_blue_bright"
+        android:padding="20dp" />
+
+    <!--  轮盘阴影  -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:src="@drawable/bg_wheel_shadow" />
+
+    <!--  轮盘边框  -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:src="@drawable/bg_wheel_border" />
+
+    <!--  灯光1  -->
+    <ImageView
+        android:id="@+id/view_light1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:src="@drawable/bg_wheel_border_light1"
+        android:visibility="gone" />
+
+    <!--  灯光2  -->
+    <ImageView
+        android:id="@+id/view_light2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:src="@drawable/bg_wheel_border_light2"
+        android:visibility="gone" />
+
+    <!--  按钮加入  -->
+    <ImageView
+        android:id="@+id/view_action_join"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:src="@drawable/bg_wheel_action_join" />
+
+    <!--  按钮旋转  -->
+    <ImageView
+        android:id="@+id/view_action_running"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:src="@drawable/bg_wheel_action_running"
+        android:visibility="gone" />
+</FrameLayout>
