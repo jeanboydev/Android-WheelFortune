@@ -10,6 +10,7 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
@@ -112,11 +113,11 @@ class DiskLayout : FrameLayout {
         removeAllViews()
         toAddTray()
         for (i in 0 until dataList.size) {
-            toAddItemView(dataList[i], i)
+            toAddItemView(dataList[i])
         }
     }
 
-    private fun toAddItemView(data: ItemData, index: Int) {
+    private fun toAddItemView(data: ItemData) {
         val itemView =
             LayoutInflater.from(context).inflate(R.layout.layout_disk_avatar, this, false)
         val iv_avatar = itemView.findViewById<ImageView>(R.id.iv_avatar)
@@ -185,10 +186,12 @@ class DiskLayout : FrameLayout {
         isRunning = true
 
         val circleAngle = getRandomAngleForRotate() // 随机旋转圈数
-        val rangeAngle = totalAngle - sweepAngle * removeIndex // 旋转到目标 item 需要的角度
-        val offsetAngle = getRandomAngleInItem(sweepAngle) // item 中随机便宜角度
-        val targetAngle = circleAngle + rangeAngle + offsetAngle
-        val valueAnimator = ValueAnimator.ofFloat(rotateAngle, rotateAngle + targetAngle).apply {
+        val rangeAngle = totalAngle - sweepAngle * removeIndex  // 旋转到目标 item 需要的角度
+        val offsetAngle =
+            (getRandomAngleInItem(sweepAngle) + abs(rotateAngle)) % sweepAngle // item 中随机角度
+        val targetAngle = circleAngle + rangeAngle - offsetAngle
+        val startAngle = rotateAngle % totalAngle
+        val valueAnimator = ValueAnimator.ofFloat(startAngle, targetAngle).apply {
             interpolator = DecelerateInterpolator()
             duration = 2500
         }
