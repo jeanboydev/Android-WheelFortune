@@ -1,4 +1,4 @@
-package com.jeanboy.app.wheelfortune
+package com.jeanboy.component.wheelfortune
 
 import android.content.Context
 import android.os.Bundle
@@ -12,6 +12,8 @@ import java.lang.ref.WeakReference
 
 /**
  * Created by jeanboy on 2021/1/21 14:42.
+ *
+ * 转盘入口
  */
 class WheelFortuneView : FrameLayout {
 
@@ -19,7 +21,7 @@ class WheelFortuneView : FrameLayout {
     private var view_light2: View? = null
     private var view_action_join: View? = null
     private var view_action_running: View? = null
-    private var discLayout: DiscLayout? = null
+    private var diskLayout: DiskLayout? = null
 
     private val myHandler = MyHandler(this)
     private var index = 0
@@ -44,33 +46,18 @@ class WheelFortuneView : FrameLayout {
             onJoinClick()
         }
 
-        discLayout = findViewById(R.id.discLayout)
-    }
+        diskLayout = findViewById(R.id.discLayout)
+        diskLayout?.setListener(object : DiskLayout.OnRunningListener {
+            override fun onStart() {
+                view_action_join?.visibility = View.GONE
+                view_action_running?.visibility = View.VISIBLE
+            }
 
-    private var size = 0
-    private fun onJoinClick() {
-        size++
-        if (size == 1) {
-            toAddData()
-        } else {
-            discLayout?.toRunning(3)
-        }
-    }
-
-    private fun toAddData() {
-        discLayout?.setData(
-            mutableListOf(
-                ItemData("", false),
-                ItemData("", false),
-                ItemData("", false),
-                ItemData("", false),
-                ItemData("", false),
-                ItemData("", false),
-                ItemData("", false),
-                ItemData("", false),
-                ItemData("", false),
-            )
-        )
+            override fun onEnd(removeData: ItemData) {
+                view_action_join?.visibility = View.VISIBLE
+                view_action_running?.visibility = View.GONE
+            }
+        })
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -108,6 +95,37 @@ class WheelFortuneView : FrameLayout {
             view_light2?.visibility = View.VISIBLE
         }
         toStartMarquee()
+    }
+
+
+    private fun onJoinClick() {
+        this.listener?.onClick()
+    }
+
+    private var listener: OnJoinClickListener? = null
+
+    fun setListener(listener: OnJoinClickListener) {
+        this.listener = listener
+    }
+
+    interface OnJoinClickListener {
+        fun onClick()
+    }
+
+    fun toRunning(removeIndex: Int) {
+        diskLayout?.toRunning(removeIndex)
+    }
+
+    fun setData(dataList: MutableList<ItemData>) {
+        diskLayout?.setData(dataList)
+    }
+
+    fun addData(itemData: ItemData) {
+        diskLayout?.addData(itemData)
+    }
+
+    fun clearData() {
+        diskLayout?.clearData()
     }
 
     private class MyHandler(context: WheelFortuneView) : Handler(Looper.myLooper()!!) {

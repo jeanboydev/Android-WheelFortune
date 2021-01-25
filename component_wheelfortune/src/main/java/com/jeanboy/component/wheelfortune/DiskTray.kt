@@ -1,6 +1,5 @@
-package com.jeanboy.app.wheelfortune
+package com.jeanboy.component.wheelfortune
 
-import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -8,13 +7,13 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
-import android.view.animation.AccelerateDecelerateInterpolator
-import kotlin.random.Random
 
 /**
  * Created by jeanboy on 2021/1/21 14:42.
+ *
+ * 转盘彩色托盘
  */
-class DiscTray : View {
+class DiskTray : View {
 
     private val colorDefault = Color.parseColor("#652CC9")
     private val colorPalette: Array<Int> = arrayOf(
@@ -42,25 +41,7 @@ class DiscTray : View {
     private var sweepAngle: Float = 0f // 每个 item 角度
     private var rotateAngle: Float = 0f // 旋转角度
 
-    private val dataList = mutableListOf<ItemData>()
-
-    fun setData(dataList: MutableList<ItemData>) {
-        this.dataList.clear()
-        this.dataList.addAll(dataList)
-        this.sweepAngle = totalAngle / dataList.size
-        postInvalidate()
-    }
-
-    fun addData(itemData: ItemData) {
-        this.dataList.add(itemData)
-        this.sweepAngle = totalAngle / dataList.size
-        postInvalidate()
-    }
-
-    fun clearData() {
-        this.dataList.clear()
-        postInvalidate()
-    }
+    private var itemCount = 0
 
     constructor(context: Context) : this(context, null)
 
@@ -70,8 +51,7 @@ class DiscTray : View {
         context,
         attrs,
         defStyleAttr
-    ) {
-    }
+    )
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val width = MeasureSpec.getSize(widthMeasureSpec)
@@ -98,12 +78,12 @@ class DiscTray : View {
 
     private fun drawPanel(canvas: Canvas?) {
         val rectF = RectF(mLeft, mTop, mLeft + panelSize, mTop + panelSize)
-        if (dataList.isEmpty()) {
+        if (itemCount == 0) {
             paint.color = colorDefault
             canvas?.drawArc(rectF, resetAngle, totalAngle, true, paint)
         } else {
             var startAngle = resetAngle + rotateAngle
-            for (i in dataList.indices) {
+            for (i in 0 until itemCount) {
                 val colorIndex = if (i >= colorPalette.size) 0 else i
                 paint.color = colorPalette[colorIndex]
                 canvas?.drawArc(rectF, startAngle, sweepAngle, true, paint)
@@ -112,33 +92,14 @@ class DiscTray : View {
         }
     }
 
-    fun toRunning(removeIndex: Int) {
-        if (dataList.isEmpty()) return
-        val targetAngle =
-            getRandomAngleForRotate() + sweepAngle * removeIndex + getRandomAngleInItem(sweepAngle)
-        val valueAnimator = ValueAnimator.ofFloat(rotateAngle, rotateAngle + targetAngle).apply {
-            interpolator = AccelerateDecelerateInterpolator()
-            duration = 3000
-        }
-        valueAnimator.addUpdateListener {
-            rotateAngle = it.animatedValue as Float
-            postInvalidate()
-        }
-        valueAnimator.start()
+    fun setData(itemCount: Int) {
+        this.itemCount = itemCount
+        this.sweepAngle = if (itemCount == 0) totalAngle else totalAngle / itemCount
+        postInvalidate()
     }
 
-    /**
-     * 获取命中 item 区间的旋转角度
-     */
-    private fun getRandomAngleInItem(sweepAngle: Float): Float {
-        return Random.nextInt(1, sweepAngle.toInt()).toFloat()
-    }
-
-    /**
-     * 获取旋转圈数的旋转角度
-     */
-    private fun getRandomAngleForRotate(): Float {
-        // 0 - 2 圈
-        return Random.nextInt(1, 3) * totalAngle
+    fun setRotateAngle(rotateAngle: Float) {
+        this.rotateAngle = rotateAngle
+        postInvalidate()
     }
 }

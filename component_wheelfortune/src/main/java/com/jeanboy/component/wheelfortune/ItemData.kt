@@ -1,4 +1,4 @@
-package com.jeanboy.app.wheelfortune
+package com.jeanboy.component.wheelfortune
 
 /**
  * Created by jeanboy on 2021/1/23 17:10.

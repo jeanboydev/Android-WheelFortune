@@ -11,13 +11,12 @@
         android:src="@drawable/bg_wheel_panel" />
 
     <!--  转盘  -->
-    <com.jeanboy.app.wheelfortune.DiscLayout
+    <com.jeanboy.component.wheelfortune.DiskLayout
         android:id="@+id/discLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:background="@android:color/holo_blue_bright"
         android:padding="20dp" />
 
     <!--  轮盘阴影  -->

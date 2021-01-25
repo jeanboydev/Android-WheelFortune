@@ -1,2 +1,3 @@
+include ':component_wheelfortune'
 include ':app'
 rootProject.name = "WheelFortune"

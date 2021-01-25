@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.jeanboy.app.wheelfortune.DiscTray
+    <com.jeanboy.component.wheelfortune.DiskTray
         android:id="@+id/discTray"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
