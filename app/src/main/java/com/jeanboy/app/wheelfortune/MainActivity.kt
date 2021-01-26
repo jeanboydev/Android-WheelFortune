@@ -1,8 +1,9 @@
 package com.jeanboy.app.wheelfortune
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.jeanboy.component.wheelfortune.ItemData
 import com.jeanboy.component.wheelfortune.WheelFortuneView
 
@@ -48,16 +49,22 @@ class MainActivity : AppCompatActivity() {
     )
 
     var wheelFortuneView: WheelFortuneView? = null
+    var tv_user_count: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        wheelFortuneView = findViewById<WheelFortuneView>(R.id.wheelFortuneView)
+        wheelFortuneView = findViewById(R.id.wheelFortuneView)
+        tv_user_count = findViewById(R.id.tv_user_count)
 
-        wheelFortuneView?.setListener(object : WheelFortuneView.OnJoinClickListener {
-            override fun onClick() {
+        wheelFortuneView?.setListener(object : WheelFortuneView.WheelStateListener {
+            override fun onJoinClick() {
                 wheelFortuneView?.toRunning(0)
+            }
+
+            override fun onCountChange(count: Int) {
+                tv_user_count?.text = resources.getString(R.string.user_count, count, dataList.size)
             }
         })
 

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WheelFortune</string>
+    <string name="user_count">%d/%d</string>
 </resources>

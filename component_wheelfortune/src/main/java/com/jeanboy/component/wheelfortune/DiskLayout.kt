@@ -160,6 +160,10 @@ class DiskLayout : FrameLayout {
         requestLayout()
     }
 
+    fun getDataSize(): Int {
+        return dataList.size
+    }
+
     fun remove(index: Int) {
         if (this.dataList.isEmpty()) return
         if (index >= 0 && index < dataList.size) {
@@ -197,8 +201,8 @@ class DiskLayout : FrameLayout {
         }
         valueAnimator.addUpdateListener {
             rotateAngle = it.animatedValue as Float
-            requestLayout()
             diskTray?.setRotateAngle(rotateAngle)
+            requestLayout()
         }
 
         valueAnimator.addListener(object : Animator.AnimatorListener {
@@ -210,7 +214,7 @@ class DiskLayout : FrameLayout {
             override fun onAnimationEnd(animation: Animator?) {
                 remove(removeIndex)
                 isRunning = false
-                listener?.onEnd(dataList[removeIndex])
+                listener?.onEnd(dataList[removeIndex], dataList.size)
             }
 
             override fun onAnimationCancel(animation: Animator?) {
@@ -245,6 +249,6 @@ class DiskLayout : FrameLayout {
 
     interface OnRunningListener {
         fun onStart()
-        fun onEnd(removeData: ItemData)
+        fun onEnd(removeData: ItemData, count: Int)
     }
 }

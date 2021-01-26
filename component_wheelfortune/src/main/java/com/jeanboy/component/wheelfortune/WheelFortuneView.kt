@@ -53,9 +53,10 @@ class WheelFortuneView : FrameLayout {
                 view_action_running?.visibility = View.VISIBLE
             }
 
-            override fun onEnd(removeData: ItemData) {
+            override fun onEnd(removeData: ItemData, count: Int) {
                 view_action_join?.visibility = View.VISIBLE
                 view_action_running?.visibility = View.GONE
+                listener?.onCountChange(count)
             }
         })
     }
@@ -99,17 +100,18 @@ class WheelFortuneView : FrameLayout {
 
 
     private fun onJoinClick() {
-        this.listener?.onClick()
+        this.listener?.onJoinClick()
     }
 
-    private var listener: OnJoinClickListener? = null
+    private var listener: WheelStateListener? = null
 
-    fun setListener(listener: OnJoinClickListener) {
+    fun setListener(listener: WheelStateListener) {
         this.listener = listener
     }
 
-    interface OnJoinClickListener {
-        fun onClick()
+    interface WheelStateListener {
+        fun onJoinClick()
+        fun onCountChange(count: Int)
     }
 
     fun toRunning(removeIndex: Int) {
@@ -118,14 +120,17 @@ class WheelFortuneView : FrameLayout {
 
     fun setData(dataList: MutableList<ItemData>) {
         diskLayout?.setData(dataList)
+        listener?.onCountChange(diskLayout?.getDataSize() ?: 0)
     }
 
     fun addData(itemData: ItemData) {
         diskLayout?.addData(itemData)
+        listener?.onCountChange(diskLayout?.getDataSize() ?: 0)
     }
 
     fun clearData() {
         diskLayout?.clearData()
+        listener?.onCountChange(diskLayout?.getDataSize() ?: 0)
     }
 
     private class MyHandler(context: WheelFortuneView) : Handler(Looper.myLooper()!!) {

@@ -13,6 +13,38 @@
         android:layout_gravity="center"
         android:background="@drawable/bg_wheel_dialog">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:text="02:21"
+            android:textColor="#ff391865"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_user_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:drawableStart="@drawable/ic_user_count"
+            android:drawablePadding="4dp"
+            android:text="@string/user_count"
+            android:textColor="#ffffffff"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="56dp"
+            android:gravity="center"
+            android:text="Free consultation lottery"
+            android:textColor="#ffe9c296"
+            android:textSize="16sp" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,6 +56,16 @@
             android:layout_width="320dp"
             android:layout_height="320dp"
             android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="The game needs at least 3 people to open. At the beginning of the game, other people can't enter the game temporarily."
+            android:textColor="#ffffffff"
+            android:textSize="14sp" />
 
     </FrameLayout>
 
