@@ -66,6 +66,10 @@ class MainActivity : AppCompatActivity() {
             override fun onCountChange(count: Int) {
                 tv_user_count?.text = resources.getString(R.string.user_count, count, dataList.size)
             }
+
+            override fun onRemove(removeData: ItemData) {
+                
+            }
         })
 
     }

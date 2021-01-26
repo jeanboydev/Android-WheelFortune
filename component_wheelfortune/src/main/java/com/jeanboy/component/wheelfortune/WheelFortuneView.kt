@@ -57,6 +57,7 @@ class WheelFortuneView : FrameLayout {
                 view_action_join?.visibility = View.VISIBLE
                 view_action_running?.visibility = View.GONE
                 listener?.onCountChange(count)
+                listener?.onRemove(removeData)
             }
         })
     }
@@ -112,6 +113,7 @@ class WheelFortuneView : FrameLayout {
     interface WheelStateListener {
         fun onJoinClick()
         fun onCountChange(count: Int)
+        fun onRemove(removeData: ItemData)
     }
 
     fun toRunning(removeIndex: Int) {
