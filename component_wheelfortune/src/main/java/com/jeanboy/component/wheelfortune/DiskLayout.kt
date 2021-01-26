@@ -6,9 +6,11 @@ import android.content.Context
 import android.graphics.PointF
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import kotlin.math.abs
 import kotlin.math.cos
@@ -120,6 +122,18 @@ class DiskLayout : FrameLayout {
     private fun toAddItemView(data: ItemData) {
         val itemView =
             LayoutInflater.from(context).inflate(R.layout.layout_disk_avatar, this, false)
+        val iv_shape = itemView.findViewById<ImageView>(R.id.iv_shape)
+        val tv_me = itemView.findViewById<TextView>(R.id.tv_me)
+
+        if (data.self) {
+            iv_shape.drawable.level = 3333
+            iv_shape.visibility = View.VISIBLE
+            tv_me.visibility = View.VISIBLE
+        } else {
+            iv_shape.visibility = View.GONE
+            tv_me.visibility = View.GONE
+        }
+
         val iv_avatar = itemView.findViewById<ImageView>(R.id.iv_avatar)
         Glide.with(context).load(data.avatar).placeholder(R.drawable.default_avatar)
             .error(R.drawable.default_avatar).into(iv_avatar)
