@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onRemove(removeData: ItemData) {
-                
+
             }
         })
 
