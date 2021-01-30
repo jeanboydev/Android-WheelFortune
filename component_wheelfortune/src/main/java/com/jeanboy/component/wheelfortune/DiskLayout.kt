@@ -29,7 +29,8 @@ class DiskLayout : FrameLayout {
     private var mWidth: Int = 0
     private var mHeight: Int = 0
 
-    private val resetAngle: Float = -90f // 开始角度
+    private val resetAngle1: Float = 90f // 开始角度只有一条数据
+    private val resetAngle2: Float = -90f // 开始角度
     private val totalAngle: Float = 360f // 一圈角度
     private var sweepAngle: Float = 0f // 每个 item 角度
     private var rotateAngle: Float = 0f // 旋转角度
@@ -76,9 +77,11 @@ class DiskLayout : FrameLayout {
         val centerX = measuredWidth * 0.5f
         val centerY = measuredHeight * 0.5f
 
-        val startAngle = resetAngle - sweepAngle
 
         val childCount = childCount
+        val resetAngle = if (dataList.size == 1) resetAngle1 else resetAngle2
+        val rotateOffsetAngle = if (dataList.size == 1) 180f else 0f
+        val startAngle = resetAngle - sweepAngle
         for (i in 0 until childCount) {
             val childAt = getChildAt(i)
             if (childAt !is DiskTray) {
@@ -95,7 +98,7 @@ class DiskLayout : FrameLayout {
                     (point.x + widthOffset).toInt(),
                     (point.y + heightOffset).toInt()
                 )
-                childAt.rotation = offsetAngle - sweepAngle
+                childAt.rotation = offsetAngle - sweepAngle - rotateOffsetAngle
             }
         }
     }
@@ -184,6 +187,10 @@ class DiskLayout : FrameLayout {
             this.dataList.removeAt(index)
             if (this.dataList.size > 0) {
                 this.sweepAngle = totalAngle / dataList.size
+                if (this.dataList.size == 1) {
+                    this.rotateAngle = 0f;
+                    this.diskTray?.setRotateAngle(rotateAngle)
+                }
             } else {
                 this.sweepAngle = totalAngle
             }
@@ -194,6 +201,8 @@ class DiskLayout : FrameLayout {
 
     fun clearData() {
         this.dataList.clear()
+        this.rotateAngle = 0f;
+        this.diskTray?.setRotateAngle(rotateAngle)
         toClearItemView()
         requestLayout()
     }
