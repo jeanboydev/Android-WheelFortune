@@ -9,6 +9,7 @@
 ![效果图3](https://raw.githubusercontent.com/jeanboydev/Android-WheelFortune/main/resources/03.jpeg)
 ![效果图4](https://raw.githubusercontent.com/jeanboydev/Android-WheelFortune/main/resources/04.jpeg)
 
+![效果图5](https://raw.githubusercontent.com/jeanboydev/Android-WheelFortune/main/resources/00.gif)
 [点击查看效果视频](https://raw.githubusercontent.com/jeanboydev/Android-WheelFortune/main/resources/00.mp4)
 
 ## 使用
