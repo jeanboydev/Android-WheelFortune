@@ -4,11 +4,12 @@
 
 ## 效果图
 
-![效果视频](https://raw.githubusercontent.com/jeanboydev/Android-WheelFortune/main/resources/00.mp4)
 ![效果图1](https://raw.githubusercontent.com/jeanboydev/Android-WheelFortune/main/resources/01.jpeg)
 ![效果图2](https://raw.githubusercontent.com/jeanboydev/Android-WheelFortune/main/resources/02.jpeg)
 ![效果图3](https://raw.githubusercontent.com/jeanboydev/Android-WheelFortune/main/resources/03.jpeg)
 ![效果图4](https://raw.githubusercontent.com/jeanboydev/Android-WheelFortune/main/resources/04.jpeg)
+
+![点击查看效果视频][https://raw.githubusercontent.com/jeanboydev/Android-WheelFortune/main/resources/00.mp4]
 
 ## 使用
 
