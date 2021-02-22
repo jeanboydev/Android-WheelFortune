@@ -4,9 +4,15 @@
 
 ## 效果图
 
-
+![效果视频][https://raw.githubusercontent.com/jeanboydev/Android-WheelFortune/main/resources/00.mp4]
+![效果图1][https://raw.githubusercontent.com/jeanboydev/Android-WheelFortune/main/resources/01.jpeg]
+![效果图2][https://raw.githubusercontent.com/jeanboydev/Android-WheelFortune/main/resources/02.jpeg]
+![效果图3][https://raw.githubusercontent.com/jeanboydev/Android-WheelFortune/main/resources/03.jpeg]
+![效果图4][https://raw.githubusercontent.com/jeanboydev/Android-WheelFortune/main/resources/04.jpeg]
 
 ## 使用
+
+- 设置布局
 
 ```xml
 <com.jeanboy.component.wheelfortune.WheelFortuneView
@@ -16,7 +22,7 @@
   android:layout_gravity="center" />
 ```
 
-
+- 处理回调
 
 ```kotlin
 val wheelFortuneView = findViewById(R.id.wheelFortuneView)
@@ -37,11 +43,16 @@ wheelFortuneView?.setListener(object : WheelFortuneView.WheelStateListener {
 		// item 移除时回调
   }
 })
+```
 
+- 处理数据
+
+```kotlin
 // 添加数据
 wheelFortuneView?.addData(dataList[index])
 
 // 清除数据
 wheelFortuneView?.clearData()
 ```
+
 
